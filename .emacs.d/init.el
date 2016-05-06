@@ -17,6 +17,28 @@
 ;; タイトルバーにファイルのフルパスを表示
 (setq frame-title-format "%f")
 
+;; タブ幅の設定
+(setq default-tab-width 4)
+
+;;タブキーの挙動設定
+(setq indent-line-function 'indent-to-left-margin)
+
+;;パッケージ追加
+(require 'package) 
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+(package-initialize)
+
+;;Auto-Complete
+(require 'auto-complete-config)
+(ac-config-default)
+(setq ac-use-menu-map t)
+(setq ac-use-fuzzy t)
+
+;;lua-modeの設定
+(autoload 'lua-mode "lua-mode" "Lua editing mode." t)
+(add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
+(add-to-list 'interpreter-mode-alist '("lua" . lua-mode))
+
 ;;リージョンの背景色を変更
 (set-face-background 'region "darkgreen")
 
@@ -182,3 +204,10 @@
 (add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
 (add-to-list 'interpreter-mode-alist '("lua" . lua-mode))
 
+;; python-mode hook
+(add-hook 'python-mode-hook
+          '(lambda ()
+             (setq indent-tabs-mode nil)
+             (setq indent-level 4)
+             (setq python-indent 4)
+             (setq tab-width 4)))
