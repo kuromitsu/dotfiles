@@ -1,3 +1,55 @@
+
+""""""""""""""""""""""""
+"キーマッピング
+""""""""""""""""""""""""
+"誤動作防止
+nnoremap s <Nop>
+
+"分割したウィンドウを移動
+"画面を水平分割
+nnoremap ss :split
+"画面を垂直分割
+nnoremap sv :vsplit
+"下に移動
+nnoremap sj <C-w>j
+"上に移動
+nnoremap sk <C-w>k
+"右に移動
+nnoremap sl <C-w>l
+"左に移動
+nnoremap sh <C-w>h
+"次に移動
+nnoremap sw <C-w>w
+
+"分割したウィンドウそのものを移動する
+"下に移動
+nnoremap sJ <C-w>J
+"上に移動
+nnoremap sK <C-w>K
+"右に移動
+nnoremap sL <C-w>L
+"左に移動
+nnoremap sH <C-w>H
+"回転
+nnoremap sr <C-w>r
+
+"ウィンドウの大きさ変更
+"カレントウィンドウをそろえる
+nnoremap s= <C-w>=
+nnoremap sO <C-w>=
+"縦横最大化
+nnoremap so <C-w>_<C-w>l
+
+"タブ操作
+"新規タブ
+nnoremap st :tabnew
+"次のタブに切り替え
+nnoremap sn gt
+"前のタブに切り替え
+nnoremap sp gT
+
+
+
 """"""""""""""""""""""""
 "各種オプションの設定
 """"""""""""""""""""""""
@@ -41,7 +93,7 @@ set smartcase
 "検索結果をハイライト表示する
 set hlsearch
 "タブ入力を複数の空白入力に置き換える
-set expandtab
+"set expandtab
 "不可視文字の表示
 set list
 "タブと行の続きを可視化する
