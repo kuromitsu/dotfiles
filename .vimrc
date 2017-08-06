@@ -1,7 +1,5 @@
 
-""""""""""""""""""""""""
-"キーマッピング
-""""""""""""""""""""""""
+"キーマッピング {{{
 "誤動作防止
 nnoremap s <Nop>
 
@@ -42,17 +40,14 @@ nnoremap so <C-w>_<C-w>l
 
 "タブ操作
 "新規タブ
-nnoremap st :tabnew
+nnoremap st :tabnew \| b
 "次のタブに切り替え
 nnoremap sn gt
 "前のタブに切り替え
 nnoremap sp gT
+"}}} キーマッピング
 
-
-
-""""""""""""""""""""""""
-"各種オプションの設定
-""""""""""""""""""""""""
+"各種オプションの設定 {{{
 "シンタックス有効
 syntax on
 "行番号表示
@@ -64,7 +59,6 @@ set shiftwidth=4
 "行頭の余白内でTabを打ち込むと'shiftwidth'の幅だけインデントする
 set smarttab
 
-
 set noignorecase
 "スワップファイルを作らない
 set noswapfile
@@ -75,9 +69,22 @@ set cmdheight=2
 "ステータスラインを末尾2行目に常に表示
 set laststatus=2
 "ステータスライン
-set statusline=%=\ [%{(&fenc!=''?&fenc:&enc)}/%{&ff}]\[%Y]\%04l,%04v][%p%%]
+"set statusline=%=\ [%{(&fenc!=''?&fenc:&enc)}/%{&ff}]\[%Y]\%04l,%04v][%p%%]
+"set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 "ステータス行にgitbranchを表示する
 "set statusline+=%{fugitve#statusline()}
+"set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
+set statusline=[%n] "バッファ番号の表示
+set statusline+=%< "行が長いと行頭で切り詰める
+set statusline+=%f   "ファイルパス表示
+set statusline+=\ %h "へルプバッファフラグ[ヘルプ]を表示
+set statusline+=%m  "修正フラグ表示されるのは[+]
+set statusline+=%r  "読み込み専用フラグ表示されるのは[RO]
+set statusline+=%{fugitive#statusline()} "解析したコマンドの実行結果を表示(gitBranch)
+set statusline+=%=   "左寄せ項目と右寄せ項目の区切り
+set statusline+=%-14.(%l/%L,%c%V%) "右寄せする際の最小値(14)の設定および行数表示の設定
+set statusline+=%{'['.(&fenc!=''?&fenc:&enc).']['.&fileformat.']'} "文字コードとファイルタイプの設定
+set statusline+=\ %8P "行数表示の%表示
 "ウィンドウのタイトルバーにファイルのパス情報などを表示する
 set title
 "コマンドラインモードで<TAB>キーによるファイル名補完を有効にする
@@ -97,34 +104,46 @@ set hlsearch
 "不可視文字の表示
 set list
 "タブと行の続きを可視化する
-"set listchars=tab:>\ ,extend:<
+"set listchars=tab:≫-,extends:≫,precedes:≪,trail:_,nbsp:%,eol:?
+set listchars=tab:>-,extends:>,precedes:<,trail:_,nbsp:%,eol:$
+"set listchars=tab:≫-,extends:≫,precedes:≪,trail:_,nbsp:%,eol:?
+
 "対応する括弧やブレースを表示する
 set showmatch
 "改行時に前の行のインデントを継続する
 set autoindent
 "改行時に入力された行の末尾に合わせて次の行のインデントを増減する
 set smartindent
-
-
-" helptags ~/.vim/doc
-
-"""""""""""""""""""""""""""""""""""""""""""""""""
-" スクリプト個別設定
-"""""""""""""""""""""""""""""""""""""""""""""""""
-"buffertabs.vim
-"バッファタブにパスを省略してファイル名のみ表示する
-let g:buftabs_only_basename=1
-"バッファタブをステータスライン内に表示する
-let g:buftabs_in_statusline=1
-
-
+"折りたたみ設定
+set foldmethod=marker
 "------------------------------------------------
 " charcode encoding
 "------------------------------------------------
+
 set encoding=utf-8
 " set fileencodings=iso-2022-jp,euc-jp,sjis,utf-8
 set fileformats=unix,dos,mac
 
+"全角スペースをハイライト表示
+function! ZenkakuSpace()
+    highlight ZenkakuSpace cterm=reverse ctermfg=DarkMagenta gui=reverse guifg=DarkMagenta
+endfunction
+
+if has('syntax')
+    augroup ZenkakuSpace
+        autocmd!
+        autocmd ColorScheme       * call ZenkakuSpace()
+        autocmd VimEnter,WinEnter * match ZenkakuSpace /　/
+    augroup END
+    call ZenkakuSpace()
+endif
+
+"helptags ~/.vim/doc
+"}}} 各種オプションの設定
+
+"""""""""""""""""""""""""""""""""""""""""""""""""
+" スクリプト個別設定
+"""""""""""""""""""""""""""""""""""""""""""""""""
 " souce code tag system GLOBAL settings
 nmap <C-q> <C-w><C-w><C-w>q
 nmap <C-g> :Gtags -g
@@ -133,17 +152,6 @@ nmap <C-j> :GtagsCursor<CR>
 nmap <C-n> :cn<CR>
 nmap <C-p> :cp<CR>
 
-" buffertabs settings
-"バッファタブをステータスライン内に表示する
-let g:buftabs_in_statusline=1
-"現在のバッファをハイライト
-let g:buftabs_active_highlight_group="Visual"
-" set fold
-" set foldmethod=syntax
-
-" markdown preview
-au BufRead,BufNewFile *.md set filetype=markdown
-let g:previm_open_cmd = 'open -a safari'
 
 
 " EOF
