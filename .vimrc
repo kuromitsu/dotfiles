@@ -116,6 +116,11 @@ set autoindent
 set smartindent
 "折りたたみ設定
 set foldmethod=marker
+
+"ビープ音設定
+set visualbell t_vb=
+set noerrorbells
+
 "------------------------------------------------
 " charcode encoding
 "------------------------------------------------
