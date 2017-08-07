@@ -121,6 +121,8 @@ set foldmethod=marker
 set visualbell t_vb=
 set noerrorbells
 
+"カレントディレクトリを開いたソースコードの場所にする
+set autochdir
 "------------------------------------------------
 " charcode encoding
 "------------------------------------------------
@@ -151,7 +153,7 @@ endif
 """""""""""""""""""""""""""""""""""""""""""""""""
 " souce code tag system GLOBAL settings
 nmap <C-q> <C-w><C-w><C-w>q
-nmap <C-g> :Gtags -g
+nmap <C-g> :Gtags -r
 nmap <C-l> :Gtags -f %<CR>
 nmap <C-j> :GtagsCursor<CR>
 nmap <C-n> :cn<CR>
