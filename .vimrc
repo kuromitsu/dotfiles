@@ -45,6 +45,10 @@ nnoremap st :tabnew \| b
 nnoremap sn gt
 "前のタブに切り替え
 nnoremap sp gT
+
+"バッファ一覧表示
+nnoremap bb :ls<CR>:buf
+
 "}}} キーマッピング
 
 "各種オプションの設定 {{{
