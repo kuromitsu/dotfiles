@@ -109,7 +109,7 @@ set hlsearch
 set list
 "タブと行の続きを可視化する
 "set listchars=tab:≫-,extends:≫,precedes:≪,trail:_,nbsp:%,eol:?
-set listchars=tab:>-,extends:>,precedes:<,trail:_,nbsp:%,eol:$
+set listchars=tab:>_,extends:>,precedes:<,trail:_,nbsp:%,eol:$
 "set listchars=tab:≫-,extends:≫,precedes:≪,trail:_,nbsp:%,eol:?
 
 "対応する括弧やブレースを表示する
