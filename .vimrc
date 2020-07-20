@@ -72,6 +72,8 @@ set ruler
 set cmdheight=2
 "ステータスラインを末尾2行目に常に表示
 set laststatus=2
+
+let git_branch = system('git branch | grep ^*  | sed -e "s/^* \([a-zA-Z0-9]\)/\1/"')
 "ステータスライン
 "set statusline=%=\ [%{(&fenc!=''?&fenc:&enc)}/%{&ff}]\[%Y]\%04l,%04v][%p%%]
 "set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
@@ -84,7 +86,8 @@ set statusline+=%f   "ファイルパス表示
 set statusline+=\ %h "へルプバッファフラグ[ヘルプ]を表示
 set statusline+=%m  "修正フラグ表示されるのは[+]
 set statusline+=%r  "読み込み専用フラグ表示されるのは[RO]
-set statusline+=%{fugitive#statusline()} "解析したコマンドの実行結果を表示(gitBranch)
+"set statusline+=%{fugitive#statusline()} "解析したコマンドの実行結果を表示(gitBranch)
+set statusline+=%{git_branch} "解析したコマンドの実行結果を表示(gitBranch)
 set statusline+=%=   "左寄せ項目と右寄せ項目の区切り
 set statusline+=%-14.(%l/%L,%c%V%) "右寄せする際の最小値(14)の設定および行数表示の設定
 set statusline+=%{'['.(&fenc!=''?&fenc:&enc).']['.&fileformat.']'} "文字コードとファイルタイプの設定
